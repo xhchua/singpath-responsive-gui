@@ -46,7 +46,7 @@ describe('Navigate directly to links', function() {
   it('Load the carosel Twitter boostrap page.', function() {
     
     expect(element('.active a:first').text()).
-        toMatch("Home");
+        toMatch("Stories");
     if (pauseAll) pause();
   });
 
