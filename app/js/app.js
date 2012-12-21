@@ -11,7 +11,16 @@ if (testing=='true') {
 	
 	myAppDev.run(function($httpBackend) {
 
-  		//var player = {name: 'Sandra'};
+      // adds a new phone to the phones array
+      //$httpBackend.whenPOST('/^\/api\//').respond(function(method, url, data) {
+          //phones.push(angular.fromJSON(data));
+      //});
+
+      //Setup a generic controller that fetches any /api/:model/:id
+      var result = {model: "todo"};
+      $httpBackend.whenGET('/api/todo/123').respond(result);
+
+      //var player = {name: 'Sandra'};
   		var player = { countryFlagURL: "/static/flags/sg_on.png",
   					   gender: "male",
   					   isoYear: 2010,
