@@ -9,10 +9,10 @@ describe('AJAX Mocking Test', function() {
   });
 
  
-  it('Should find the ajax-loaded name as Sandra.', function() {
+  it('Should find the ajax-loaded player name.', function() {
     browser().navigateTo('../../app/index.html');
     expect(element('.carousel-caption span').text()).
-        toMatch("Sandra");
+        toMatch("Chris");
     if (pauseAll) pause();
   });
 
@@ -40,8 +40,6 @@ describe('Navigate directly to links', function() {
 
   });
 
-
-  
 
   it('Load the carosel Twitter boostrap page.', function() {
     
