@@ -10,17 +10,23 @@ if (testing=='true') {
 	var myAppDev = angular.module('myApp', ['ngResource','ngMockE2E']);
 	
 	myAppDev.run(function($httpBackend) {
+      
+      var stories = [];
+      var count = 1;
+      var testStory = {name: 'test story', id:count};
+      stories.push(testStory);
+      
+      $httpBackend.whenGET('/jsonapi/add_story').respond(function(method, url, data) {
+        //alert('method '+method+' url '+url + ' data '+data);
+        count = count + 1;
+        var newStory = {name: 'new story', id:count};
+        stories.push(newStory);      
+        return [200,newStory];
+    
+      });
 
-      // adds a new phone to the phones array
-      //$httpBackend.whenPOST('/^\/api\//').respond(function(method, url, data) {
-          //phones.push(angular.fromJSON(data));
-      //});
+      $httpBackend.whenGET('/jsonapi/stories').respond(stories); 
 
-      //Setup a generic controller that fetches any /api/:model/:id
-      var result = {model: "todo"};
-      $httpBackend.whenGET('/api/todo/123').respond(result);
-
-      //var player = {name: 'Sandra'};
   		var player = { countryFlagURL: "/static/flags/sg_on.png",
   					   gender: "male",
   					   isoYear: 2010,
@@ -37,7 +43,7 @@ if (testing=='true') {
   					   rankings: [ ],
   					   player_id: 57754,
   					   professional: "1",
-  					   nickname: "Chris",
+  					   nickname: "Ruijun",
   					   badges: [ ]
   					 }
 
