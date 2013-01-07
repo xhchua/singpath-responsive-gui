@@ -35,7 +35,10 @@ if (testing=='true') {
       });
 
       $httpBackend.whenGET('/jsonapi/stories').respond(stories); 
+      $httpBackend.whenGET('test_data/python_game.json').passThrough();
+      
       $httpBackend.whenPOST('/jsonapi/log_access').respond({"message":"tesing logging"});
+
 
   		var player = { countryFlagURL: "/static/flags/sg_on.png",
   					   gender: "male",

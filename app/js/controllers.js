@@ -29,6 +29,11 @@ function InterfacesController($scope,$resource){
         $scope.interfaces = $resource('/jsonapi/interfaces').get();
 }
 
+function GameController($scope,$resource){
+        $scope.game = $resource('test_data/python_game.json').get();
+        //$scope.mobile_game = $resource('test_data/mobile_python_game.json').get();
+}
+
 //This could be used for development.
 //Just create methods to pass in and set the model and id. 
 function StoryController($scope,$resource,$window){

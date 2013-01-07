@@ -343,9 +343,11 @@
         <div class="item">
           <img src="../assets/img/examples/slide-02.jpg" alt="">
           <div class="container">
-            <div class="carousel-caption">
-              <h1>Another example headline. <span ng-bind="generic.model">?</span> </h1>
-              <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+            <div class="carousel-caption" ng-controller="GameController">
+              <h1>The game player is <span ng-bind="game.player">?</span>. </h1>
+              <p class="lead">There are {{game.problemIDs.length}} problems in the game.<br>
+              The first problem is {{game.problems.problems[0].name}}<br>
+              </p>
               <a class="btn btn-large btn-primary" href="#about">Learn more</a>
             </div>
           </div>
