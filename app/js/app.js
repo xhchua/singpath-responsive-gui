@@ -15,7 +15,7 @@ if (testing=='true') {
       
       var stories = [];
       var count = 1;
-      var testStory = {name: 'test story', id:count, link:'http://youtube.com/1234'};
+      var testStory = {name: 'test story', id:count, url:'http://youtube.com/1234'};
       stories.push(testStory);
       
       $httpBackend.whenPOST('/jsonapi/add_story').respond(function(method, url, data) {
