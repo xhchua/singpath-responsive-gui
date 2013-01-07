@@ -3,13 +3,13 @@
 //var testing = window.location.search.replace("?testing=", "");
 var testing = 'true';
 
-var myApp = angular.module('myApp', ['ngResource']);
+var myApp = angular.module('myApp', ['ngResource', 'analytics']);
 
 //All of the overrides for testing the controllers.
 //Can change this to load a seapparate file(s) when testing.
 //Everything in this test setup should have an E2E or other test 
 if (testing=='true') {
-	var myAppDev = angular.module('myApp', ['ngResource','ngMockE2E']);
+	var myAppDev = angular.module('myApp', ['ngResource', 'analytics','ngMockE2E']);
 	
 	myAppDev.run(function($httpBackend) {
       
@@ -35,6 +35,7 @@ if (testing=='true') {
       });
 
       $httpBackend.whenGET('/jsonapi/stories').respond(stories); 
+      $httpBackend.whenPOST('/jsonapi/log_access').respond({"message":"tesing logging"});
 
   		var player = { countryFlagURL: "/static/flags/sg_on.png",
   					   gender: "male",
