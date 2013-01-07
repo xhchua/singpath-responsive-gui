@@ -6,6 +6,8 @@ var testing = 'true';
 var myApp = angular.module('myApp', ['ngResource']);
 
 //All of the overrides for testing the controllers.
+//Can change this to load a seapparate file(s) when testing.
+//Everything in this test setup should have an E2E or other test 
 if (testing=='true') {
 	var myAppDev = angular.module('myApp', ['ngResource','ngMockE2E']);
 	
@@ -23,6 +25,13 @@ if (testing=='true') {
         stories.push(newStory);      
         return [200,newStory];
     
+      });
+      
+      //Generic Response to catch anything sent to the SingPath rest API
+      //Should intercept anything to /jsonapi/rest/. Using a regular expression to match url
+      $httpBackend.whenGET(/^\/jsonapi\/rest\//).respond(function(method, url, data) {
+        //alert('method '+method+' url '+url + ' data '+data);      
+        return [200,{"message":"Still under development"}];
       });
 
       $httpBackend.whenGET('/jsonapi/stories').respond(stories); 
