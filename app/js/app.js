@@ -15,13 +15,13 @@ if (testing=='true') {
       
       var stories = [];
       var count = 1;
-      var testStory = {name: 'test story', id:count};
+      var testStory = {name: 'test story', id:count, link:'http://youtube.com/1234'};
       stories.push(testStory);
       
-      $httpBackend.whenGET('/jsonapi/add_story').respond(function(method, url, data) {
-        //alert('method '+method+' url '+url + ' data '+data);
+      $httpBackend.whenPOST('/jsonapi/add_story').respond(function(method, url, data) {
+        var newStory = JSON.parse(data);
         count = count + 1;
-        var newStory = {name: 'new story', id:count};
+        newStory['id'] = count;
         stories.push(newStory);      
         return [200,newStory];
     

@@ -34,7 +34,9 @@ function InterfacesController($scope,$resource){
 function StoryController($scope,$resource,$window){
     
 		$scope.StoryModel = $resource('/jsonapi/stories');
-        
+    
+    $scope.story = {"name":"My Cool Story", 
+                    "url": "http://www.youtube.com/12345"};  
 		//A method to fetch a generic model and id. 
     $scope.fetch_stories = function(){
           $scope.StoryModel.query({}, function(response){
@@ -45,9 +47,10 @@ function StoryController($scope,$resource,$window){
     $scope.add = function(){
           //Wait for the response and then update phones.
           $scope.AddStory = $resource('/jsonapi/add_story');
-          $scope.AddStory.get({}, function(response){
-              $scope.story = response;
-              //alert("Added story "+response.name);
+
+          var new_story = new $scope.AddStory($scope.story);
+          new_story.$save(function(response){
+              //$scope.story = response;
               $scope.fetch_stories();
           });
     };
