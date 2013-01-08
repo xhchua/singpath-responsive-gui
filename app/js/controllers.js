@@ -41,7 +41,7 @@ function StoryController($scope,$resource,$window){
 		$scope.StoryModel = $resource('/jsonapi/stories');
     
     $scope.story = {"name":"My Cool Story", 
-                    "url": "http://www.youtube.com/12345"};  
+                    "url": "ae_DKNwK_ms"};  
 		//A method to fetch a generic model and id. 
     $scope.fetch_stories = function(){
           $scope.StoryModel.query({}, function(response){
