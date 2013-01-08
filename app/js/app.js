@@ -3,24 +3,43 @@
 //var testing = window.location.search.replace("?testing=", "");
 var testing = 'true';
 
-var myApp = angular.module('myApp', ['ngResource']);
+var myApp = angular.module('myApp', ['ngResource', 'analytics']);
 
 //All of the overrides for testing the controllers.
+//Can change this to load a seapparate file(s) when testing.
+//Everything in this test setup should have an E2E or other test 
 if (testing=='true') {
-	var myAppDev = angular.module('myApp', ['ngResource','ngMockE2E']);
+	var myAppDev = angular.module('myApp', ['ngResource', 'analytics','ngMockE2E']);
 	
 	myAppDev.run(function($httpBackend) {
+      
+      var stories = [];
+      var count = 1;
+      var testStory = {name: 'test story', id:count, url:'http://youtube.com/1234'};
+      stories.push(testStory);
+      
+      $httpBackend.whenPOST('/jsonapi/add_story').respond(function(method, url, data) {
+        var newStory = JSON.parse(data);
+        count = count + 1;
+        newStory['id'] = count;
+        stories.push(newStory);      
+        return [200,newStory];
+    
+      });
+      
+      //Generic Response to catch anything sent to the SingPath rest API
+      //Should intercept anything to /jsonapi/rest/. Using a regular expression to match url
+      $httpBackend.whenGET(/^\/jsonapi\/rest\//).respond(function(method, url, data) {
+        //alert('method '+method+' url '+url + ' data '+data);      
+        return [200,{"message":"Still under development"}];
+      });
 
-      // adds a new phone to the phones array
-      //$httpBackend.whenPOST('/^\/api\//').respond(function(method, url, data) {
-          //phones.push(angular.fromJSON(data));
-      //});
+      $httpBackend.whenGET('/jsonapi/stories').respond(stories); 
+      $httpBackend.whenGET('test_data/python_game.json').passThrough();
+      
+      $httpBackend.whenPOST('/jsonapi/log_access').respond({"message":"tesing logging"});
 
-      //Setup a generic controller that fetches any /api/:model/:id
-      var result = {model: "todo"};
-      $httpBackend.whenGET('/api/todo/123').respond(result);
 
-      //var player = {name: 'Sandra'};
   		var player = { countryFlagURL: "/static/flags/sg_on.png",
   					   gender: "male",
   					   isoYear: 2010,
@@ -37,7 +56,7 @@ if (testing=='true') {
   					   rankings: [ ],
   					   player_id: 57754,
   					   professional: "1",
-  					   nickname: "Chris",
+  					   nickname: "Ruijun",
   					   badges: [ ]
   					 }
 
