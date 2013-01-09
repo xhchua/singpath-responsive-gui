@@ -3,9 +3,11 @@
 /* Controllers */
 //The index controller is mainly used for logging all clicks. 
 //Logging to Google Analytics and SingPath
-function IndexController($scope,$resource,$window){
+function IndexController($scope,$resource,$location,$window){
     
+    $scope.location = $location;
     $scope.log_event = function($event){
+        
         $scope.clicked = $event.target.name;
         //Log event to Google Analytics
         //This will log from 127.0.0.1 but not local host. 
@@ -22,7 +24,7 @@ function IndexController($scope,$resource,$window){
 
 
 function PlayerController($scope,$resource){
-        $scope.player = $resource('/jsonapi/player').get();
+        $scope.player = $resource('/jsonapi/player').get();        
 }
 
 function InterfacesController($scope,$resource){
@@ -36,8 +38,8 @@ function GameController($scope,$resource){
 
 //This could be used for development.
 //Just create methods to pass in and set the model and id. 
-function StoryController($scope,$resource,$window){
-    
+function StoryController($scope,$resource){
+    //$scope.location = $location;
 		$scope.StoryModel = $resource('/jsonapi/stories');
     
     $scope.story = {"name":"My Cool Story", 
