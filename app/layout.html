@@ -265,9 +265,7 @@
                                    <link rel="shortcut icon" href="../assets/ico/favicon.png">
   </head>
 
-  <body ng-controller="PlayerController">
-
-
+  <body ng-controller="IndexController" ng-click="log_event($event)">
 
     <!-- NAVBAR
     ================================================== -->
@@ -283,14 +281,17 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="#">SingPath</a>
+            <a class="brand" href="#">Home</a>
+            <a class="brand" href="#quests">Quests</a>
+            <a class="brand" href="#practice">Practice</a>
             <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
+
+
             <div class="nav-collapse collapse">
               <ul class="nav">
-                <li class="active"><a href="#">Stories</a></li>
-                <li><a href="#practice">Practice</a></li>
-                <li><a href="#about">Teaching</a></li>
-                <li><a href="#about">About Us</a></li>
+                <!-- class="active" -->
+                <li><a href="#teach">Teach</a></li>
+                <li><a href="#create">Create</a></li>
 
                 
                 <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
@@ -317,19 +318,24 @@
       </div> <!-- /.container -->
     </div><!-- /.navbar-wrapper -->
 
-
-
-    <!-- Carousel
-    ================================================== -->
-    <div id="myCarousel" class="carousel slide">
+    <!-- if no path, show the home page. 
+    Else show the carosel for Quest, Pracitce, Teaching, or Create
+    -->
+    <div ng-view></div>
+    
+    <div ng-show="location.path()==''">
+      <div id="myCarousel" class="carousel slide">
       <div class="carousel-inner">
         <div class="item active">
           <img src="../assets/img/examples/slide-01.jpg" alt="">
           <div class="container">
-            <div class="carousel-caption">
-              <h1>Example headline for <span ng-bind="player.nickname">?</span></h1>
-              <p class="lead">The Chris variable was loaded via AJAX. This shows that the basics are in place. You now need to do this for all of the other views.</p>
-              <a class="btn btn-large btn-primary" href="#contact">Contact</a>
+            <div class="carousel-caption" ng-controller="PlayerController">
+              <h1>Hello <span ng-bind="player.nickname">??</span>
+             
+                 <font color="white">
+                This is the default carosel embedded in the page. This shows up when there is # in the url.
+                </font></h1>
+              
             </div>
           </div>
         </div>
@@ -337,8 +343,7 @@
           <img src="../assets/img/examples/slide-02.jpg" alt="">
           <div class="container">
             <div class="carousel-caption">
-              <h1>Another example headline.</h1>
-              <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              <h1>Still on embedded landing carosel</h1>
               <a class="btn btn-large btn-primary" href="#about">Learn more</a>
             </div>
           </div>
@@ -356,10 +361,14 @@
       </div>
       <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
       <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
-    </div><!-- /.carousel -->
+      </div><!-- /.carousel -->
 
+    </div> <!-- End default Carosel -->
+    
 
-
+    <!-- Carousel
+    ================================================== -->
+    
     <!-- Marketing messaging and featurettes
     ================================================== -->
     <!-- Wrap the rest of the page in another container to center all the content. -->
@@ -436,6 +445,9 @@
     <script src="lib/angular/angular.min.js"></script>
     <script src="lib/angular/angular-resource.min.js"></script>
     <script src="js/controllers.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/directives.js"></script>
     <script src="js/app.js"></script>
     <script src="js/analytics.js"></script>
     <script src="../test/lib/angular/angular-mocks.js"></script>

@@ -12,7 +12,7 @@ describe('AJAX Mocking Test', function() {
   it('Should find the ajax-loaded player name.', function() {
     browser().navigateTo('../../app/index.html');
     expect(element('.carousel-caption span').text()).
-        toMatch("Chris");
+        toMatch("Ruijun");
     if (pauseAll) pause();
   });
 
